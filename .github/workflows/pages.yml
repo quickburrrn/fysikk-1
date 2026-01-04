@@ -8,7 +8,7 @@ on:
 permissions:
   contents: read
   pages: write
-  id-tokens: write
+  id-token: write
 
 concurrency:
   group: "pages"
@@ -17,15 +17,15 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Build HTML with Pandoc + MathJax
+      - name: Build HTML with Pandoc + MathJax
         run: |
           mkdir -p _site
           docker run --rm -v "$PWD":/data pandoc/core:3.1 \
-            /data/fysikk1.tex \
+            /data/fysikk1/fysikk.tex \
             --standalone \
             --mathjax \
             -o /data/_site/index.html
